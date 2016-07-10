@@ -10,7 +10,7 @@ if possible.
 
 Requirements for this UI are to be fairly lite/minimal, responsive, be able to
 enable WiFi, pick AP, connect/disconnect to and get basic status/scan updates,
-nothing fancy.
+nothing fancy, can almost be considered to be a proof of concept.
 
 .. figure:: https://raw.githubusercontent.com/mk-fg/NetworkManager-WiFi-WebUI/master/doc/nm-wifi-webui.jpg
    :alt: nm-wifi-webui interface looks
@@ -59,6 +59,14 @@ Requirements
 Notes
 -----
 
+* Obviously, being a WebUI, this thing is only accessible through some kind of
+  network interface (loopback counts), and at the same time is responsible for
+  setting one up, so keep that in mind wrt potential uses.
+
+  Common use-case is to show up in kiosk-mode browser on something like
+  Raspberry Pi (until there's net connection), or be accessible over (not
+  managed by NM) ethernet link.
+
 * Code is from back 2014, so is a bit rusty and bitrotten, fixes are most welcome.
 
   In particular, sockjs/websockets over insecure connection don't seem to work in
@@ -81,4 +89,5 @@ Notes
 * When debugging DBus or websocket stuff, running script with --noise option can
   be useful, as it'd dump all traffic on these, as script is sending/receiving it.
 
-* Not using the thing (or NM) myself, so likely not a very well-maintained project.
+* Not using the thing (or NM) myself on a regular basis, so likely not a very
+  well-maintained project.
