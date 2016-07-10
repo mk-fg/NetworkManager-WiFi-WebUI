@@ -1,0 +1,7 @@
+bencode==1.0
+Jinja2==2.8
+MarkupSafe==0.23
+Twisted==16.3.0
+txdbus==1.0.13
+txsockjs==1.2.2
+zope.interface==4.2.0

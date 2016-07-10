@@ -1,0 +1,23 @@
+#sb-ap-list .dropdown-menu {
+  display: block;
+  position: static; }
+
+#sb-conn-mode-box {
+  display: none; }
+
+#sb-ap-list > li {
+  margin: 3em 1em; }
+  #sb-ap-list > li .sb-ap-btn-main {
+    color: white;
+    background-color: #3276b1;
+    border-color: #285e8e; }
+    #sb-ap-list > li .sb-ap-btn-main.btn-success {
+      background-color: #47a447;
+      border-color: #398439; }
+
+.sb-ap-bar {
+  border-color: white; }
+
+.sb-ap-bar-inner {
+  background-color: white; }
+

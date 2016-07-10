@@ -1,0 +1,19 @@
+#sb-ap-list .dropdown-menu { display: block; position: static; }
+
+#sb-conn-mode-box { display: none; }
+
+#sb-ap-list > li {
+	margin: 3em 1em;
+	.sb-ap-btn-main {
+		color: white;
+		background-color: rgb(50, 118, 177);
+		border-color: rgb(40, 94, 142);
+		&.btn-success {
+			background-color: rgb(71, 164, 71);
+			border-color: rgb(57, 132, 57);
+		}
+	}
+}
+
+.sb-ap-bar { border-color: white; }
+.sb-ap-bar-inner { background-color: white; }

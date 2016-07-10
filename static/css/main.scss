@@ -1,0 +1,54 @@
+label.sb-label { font-weight: normal; }
+
+.container { padding: 1em 0; }
+
+#sb-scan { display: none; }
+
+#sb-ap-list {
+	margin: 2em 0;
+	li { margin: 1em; }
+}
+
+.sb-ap-btn-main {
+	padding: { right: 55px; left: 1em; }
+	text-align: left;
+}
+
+.sb-ap-indicators {
+	position: absolute;
+	right: 55px;
+	width: 55px;
+}
+.sb-ap-indicators,
+.sb-ap-indicators span { display: inline-block; }
+
+.sb-ap-private {
+	position: relative;
+	top: -1px;
+}
+
+.sb-ap-bar {
+	width: 50px;
+	padding: 1px;
+	border: 1px solid black;
+	height: 20px;
+	text-align: left;
+}
+.sb-ap-bar-inner {
+	width: 0;
+	background: black;
+	height: 16px;
+	margin: 0;
+}
+.btn-success, .btn-info, .btn-danger {
+	.sb-ap-bar { border-color: white; }
+	.sb-ap-bar-inner { background-color: white; }
+}
+
+.sb-ap-form-auto-box {
+	margin: { top: .5em; left: .5em; }
+	.sb-ap-form-auto {
+		position: relative;
+		top: .2em;
+	}
+}

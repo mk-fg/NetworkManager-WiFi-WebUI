@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>		 <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-switch.min.css">
+		<link rel="stylesheet" href="css/main.css">
+
+		<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		<noscript><link rel="stylesheet" href="css/noscript.css"></noscript>
+	</head>
+	<body>
+		<!--[if lt IE 7]>
+			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+		<![endif]-->
+
+
+	<div class="container">
+
+		{% macro ap_item(ap={
+				'uid': 'none', 'title': 'ap_info_here', 'ssid': 'ap_ssid_here',
+				'strength': 0, '_tpl': True, 'private': False, 'pass_state': False }) -%}
+			{% set connected = nm_connection and ap['uid'] != 'none' and nm_ap.uid == ap['uid']  %}
+					<li id="sb-ap-uid-{{ ap['uid'] }}" class="sb-ap {{ 'sb-ap-tpl hidden' if '_tpl' in ap }}">
+						<div class="btn-group btn-block">
+						<form method="post">
+							<input type="hidden" class="sb-ap-uid" name="uid" value="{{ ap['uid'] }}">
+
+							<button type="button" type="submit"
+									class="sb-ap-btn-main btn btn-default btn-block dropdown-toggle
+										{{- ' btn-success' if connected -}}
+										{{- ' btn-info' if nm_code and nm_code.startswith('live_') and nm_ap.uid == ap['uid'] -}}
+										"
+									data-toggle="dropdown" title="{{ ap['title']|e }}">
+								<span class="ssid">{{ ap['ssid']|e }}</span>
+								<span class="sb-ap-indicators">
+									<span class="sb-ap-private glyphicon glyphicon-lock {{ 'invisible' if not ap['private'] }}"></span>
+									<span class="sb-ap-bar">
+										<span class="sb-ap-bar-inner" style="width: {{ ap['strength'] }}%;"></span>
+									</span>
+								</span>
+							</button>
+
+							<ul class="dropdown-menu btn-block">
+								<li>
+									{% set state = 'has-feedback has-{}'.format(ap['pass_state']) %}
+									<span class="sb-ap-form-passphrase input-group
+											{{- ' hidden' if not ap['private'] }} {{ state if ap['pass_state'] }}">
+										<span class="sb-ap-state input-group-addon">
+											<span title="Valid passphrase already stored"
+												class="sb-ap-state-success glyphicon glyphicon-ok {{ 'hidden' if ap['pass_state'] != 'success' }}"></span>
+											<span title="Stored passphrase was rejected by access point"
+												class="sb-ap-state-error glyphicon glyphicon-remove {{ 'hidden' if ap['pass_state'] != 'error' }}"></span>
+										</span>
+										{%- set ph_pass_state_success = '●●●●●●' %}
+										{%- set ph_pass_state_other = 'Passphrase' %}
+										<input type="password" class="sb-ap-passphrase form-control" name="p"
+											placeholder="{{ ph_pass_state_other if ap['pass_state'] != 'success' else ph_pass_state_success }}"
+											data-ph-state-success="{{ ph_pass_state_success }}" data-ph-state-other="{{ ph_pass_state_other }}">
+										<span class="input-group-btn">
+											<button type="submit"
+												class="sb-ap-form-connect-btn btn btn-danger {{ 'hidden' if not connected }}"
+												name="disconnect" value="t">Disconnect</button>
+											<button type="submit"
+												class="sb-ap-form-connect-btn btn btn-default {{ 'hidden' if connected }}"
+												name="connect" value="t">Connect</button>
+										</span>
+									</span>
+
+									<span class="sb-ap-form-connect-open {{ 'hidden' if ap['private'] }}">
+										<button type="submit"
+											class="btn btn-danger sb-ap-form-connect-btn {{ 'hidden' if not connected }}"
+											name="disconnect" value="t">Disconnect</button>
+										<button type="submit"
+											class="btn btn-default sb-ap-form-connect-btn {{ 'hidden' if connected }}"
+											name="connect" value="t">Connect</button>
+									</span>
+
+									<div class="sb-ap-form-auto-box">
+										<input type="checkbox" class="sb-ap-form-auto"
+											name="auto" value="t" {{ 'checked'|unless_false(ap['auto']) }}
+											data-size="mini">
+										<label class="sb-label"><small>connect to this network automatically</small></label>
+									</div>
+								</li>
+							</ul>
+
+						</form>
+						</div>
+					</li>
+		{%- endmacro %}
+
+		<div class="row">
+			<div class="col-xs-offset-6 col-xs-6 col-sm-offset-4 col-sm-4">
+
+				{% set state = 'success' if nm_code == 'done' else 'info' %}
+				<div id="sb-conn-box" class="alert alert-{{ state}} small {{ 'hidden' if not nm_status }}">
+					<p>Status: <span id="sb-conn-status">{{ nm_status }}</span></p>
+					<p>Action: <span id="sb-conn-action">{{ nm_action }}</span></p>
+					<p id="sb-conn-config" {{ 'class="hidden"' if not nm_config }}>{{ '' if not nm_config else nm_config }}</p>
+				</div>
+
+				<noscript><div class="alert alert-info small">Reload page to update connection status</div></noscript>
+
+				<div class="well">
+					<a href="scan" id="sb-scan" class="btn btn-primary pull-right" role="button">Scan</a>
+					<div id="sb-conn-mode-box">
+						<label class="sb-label" for="sb-conn-mode">Mode:</label>
+						<input type="checkbox"
+							id="sb-conn-mode"
+							{{ 'checked' if nm_enabled }}
+							data-on-color="success" data-off-color="danger"
+							data-on-text="Online" data-off-text="Offline">
+					</div>
+					<noscript>
+						{%- if not nm_enabled -%}
+						<a href="online" class="btn btn-success" role="button">Switch to Online Mode</a>
+						{%- else -%}
+						<a href="offline" class="btn btn-danger" role="button">Switch to Offline Mode</a>
+						{%- endif -%}
+					</noscript>
+				</div>
+
+				<ul id="sb-ap-list" class="list-unstyled">
+
+					{# Template for JS -#}
+					{{ ap_item() }}
+
+					{% for ap in ap_data -%}{{ ap_item(ap) }}{% endfor -%}
+
+					<li class="sb-ap-list-empty {{ 'hidden' if ap_data }}">No Access Points detected</li>
+				</ul>
+			</div>
+		</div>
+
+	</div> <!-- /container -->
+
+
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.0.min.js"><\/script>')</script>
+		<script src="js/vendor/bootstrap.min.js"></script>
+		<script src="js/vendor/bootstrap-switch.min.js"></script>
+		<script src="js/vendor/sockjs-0.3.4.min.js"></script>
+
+		<script src="js/main.js" data-events-url="{{ events_url }}" data-aps="{{ ap_data|json|e }}"></script>
+	</body>
+</html>
