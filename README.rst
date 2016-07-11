@@ -67,10 +67,13 @@ Notes
   Raspberry Pi (until there's net connection), or be accessible over (not
   managed by NM) ethernet link.
 
-* Code is from back 2014, so is a bit rusty and bitrotten, fixes are most welcome.
+* Code is a bit rusty and bitrotten, fixes are most welcome.
 
   In particular, sockjs/websockets over insecure connection don't seem to work in
   modern FF for me, which might be trivial to fix though.
+
+  Also, not using the thing (or NM) myself on a regular basis, so likely not a
+  very well-maintained project.
 
 * Doesn't need any extra webserver, as it runs on twisted.
 
@@ -88,6 +91,3 @@ Notes
 
 * When debugging DBus or websocket stuff, running script with --noise option can
   be useful, as it'd dump all traffic on these, as script is sending/receiving it.
-
-* Not using the thing (or NM) myself on a regular basis, so likely not a very
-  well-maintained project.

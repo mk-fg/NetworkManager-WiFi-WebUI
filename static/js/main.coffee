@@ -2,10 +2,6 @@
 assert = (condition, message) ->
 	if not condition then throw message or 'Assertion failed'
 
-sb_log = (msg) ->
-	try
-		console.log(msg)
-
 
 ## Make sure we have all we need before going dynamic
 
@@ -26,7 +22,7 @@ ap_list_empty = ap_list.find('.sb-ap-list-empty')
 ap_tpl = ap_list.find('.sb-ap.sb-ap-tpl')
 assert ap_list_empty and ap_tpl and conn_box
 
-# sb_log(data_node.data('aps'))
+# console.log(data_node.data('aps'))
 
 
 $(document).ready ->
@@ -34,7 +30,7 @@ $(document).ready ->
 	## Websockets base
 
 	sock_url = data_node.data('events-url')
-	sb_log("SockJS url: #{sock_url}")
+	console.log('SockJS url:', sock_url)
 	assert sock_url
 
 	sock_evid = 0
@@ -49,6 +45,7 @@ $(document).ready ->
 		data = {} if not data?
 		data.q = q
 		data.id = sock_evid_get()
+		console.log('sending:', data)
 		sock.send(JSON.stringify(data))
 		data.id
 
@@ -59,7 +56,7 @@ $(document).ready ->
 		sock.onmessage = sock_onmessage
 
 	sock_onopen = ->
-		sb_log("connected to #{sock_url}")
+		console.log('connected to:', sock_url)
 		if sock_connect_timer
 			clearInterval(sock_connect_timer)
 			ap_list.find('.sb-ap').not(ap_tpl).remove()
@@ -67,13 +64,13 @@ $(document).ready ->
 			sock_connect_timer = null
 
 	sock_onclose = ->
-		sb_log("disconnected from #{sock_url}")
+		console.log('disconnected from:', sock_url)
 		if not sock_connect_timer
 			sock_connect_timer = window.setInterval((-> sock_connect()), 2000)
 
 	sock_onmessage = (e) ->
-		# sb_log('message', e.data)
 		data = $.parseJSON(e.data)
+		console.log('message:', data)
 
 		if data.q == 'new' or data.q == 'update'
 			if data.q == 'new'
@@ -184,7 +181,7 @@ $(document).ready ->
 				delete sock_evid_handlers[data.id]
 
 		else
-			sb_log("unrecognized ev: #{e.data}")
+			console.log('unrecognized ev:', data)
 
 	sock_connect()
 
@@ -204,7 +201,7 @@ $(document).ready ->
 		else if action == 'disconnect'
 			sock_send('disconnect')
 		else
-			sb_log('Unrecognized form action', form_data)
+			console.log('Unrecognized form action:', form_data)
 		false
 
 
