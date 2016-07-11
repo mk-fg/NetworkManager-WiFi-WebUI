@@ -348,7 +348,7 @@ class NMInterface(service.MultiService):
 		self.iface_set.discard(dev_path)
 		for sig_ref in self.dev_signals.get(dev_path, set()): yield sig_ref.release()
 		if dev_path in self.dev_up:
-			iface_old = self.dev_up.pop(dev.path)
+			iface_old = self.dev_up.pop(dev_path)
 			# yield self.hook_iface_down(iface_old)
 		if dev_path == self.wifi_dev_path:
 			self.wifi_removed('iface_removed')
@@ -444,6 +444,7 @@ class NMInterface(service.MultiService):
 			assert not uuid or ap.uuid == uuid, [ap.uuid, uuid]
 			assert not force_new or uid not in self.wifi_aps, [uid, ap_params]
 		else:
+			if isinstance(self.wifi_aps.get(uid), defer.Deferred): return # locked
 			assert not force_new, [uid, ap_params]
 			assert 'dbus_path' not in ap_params, ap_params
 			assert uid in self.wifi_aps, [uid, ap_params]
