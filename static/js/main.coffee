@@ -45,7 +45,7 @@ $(document).ready ->
 		data = {} if not data?
 		data.q = q
 		data.id = sock_evid_get()
-		console.log('sending:', data)
+		# console.log('traffic >>', data)
 		sock.send(JSON.stringify(data))
 		data.id
 
@@ -70,7 +70,7 @@ $(document).ready ->
 
 	sock_onmessage = (e) ->
 		data = $.parseJSON(e.data)
-		console.log('message:', data)
+		# console.log('traffic <<', data)
 
 		if data.q == 'new' or data.q == 'update'
 			if data.q == 'new'

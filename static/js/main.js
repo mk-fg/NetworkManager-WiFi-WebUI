@@ -52,7 +52,6 @@
       }
       data.q = q;
       data.id = sock_evid_get();
-      console.log('sending:', data);
       sock.send(JSON.stringify(data));
       return data.id;
     };
@@ -84,7 +83,6 @@
     sock_onmessage = function(e) {
       var ap, ap_btn, ap_btn_default, ap_btn_reset_others, ap_btn_toggle, ap_others, ap_pass, ap_pass_box, ap_pass_ph, data;
       data = $.parseJSON(e.data);
-      console.log('message:', data);
       if (data.q === 'new' || data.q === 'update') {
         if (data.q === 'new') {
           ap = ap_tpl.clone(true).detach();
