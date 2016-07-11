@@ -10,8 +10,8 @@ streaming, long-poll, jsonp or whatever other mechanism SockJS supports, if
 possible.
 
 Requirements for this UI are to be fairly lite/minimal, responsive, be able to
-enable WiFi, pick AP, connect/disconnect to and get basic status/scan updates,
-nothing fancy, can almost be considered to be a proof of concept.
+enable WiFi, pick AP, connect/disconnect and get basic status/scan updates,
+so nothing fancy, can almost be considered to be a proof of concept.
 
 .. figure:: https://raw.githubusercontent.com/mk-fg/NetworkManager-WiFi-WebUI/master/doc/nm-wifi-webui.jpg
    :alt: nm-wifi-webui interface looks
