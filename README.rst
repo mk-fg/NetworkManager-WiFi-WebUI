@@ -25,6 +25,12 @@ Screenshot
 .. figure:: https://raw.githubusercontent.com/mk-fg/NetworkManager-WiFi-WebUI/master/doc/nm-wifi-webui.jpg
    :alt: nm-wifi-webui interface looks
 
+|
+
+Uses bundled (old v3.1.1) bootstrap icons/css/js, bootstrap-switch,
+jquery/modernizr (both can probably be dropped by now), sockjs.
+Doesn't make any external api requests, no images or other static.
+
 
 Installation
 ------------
