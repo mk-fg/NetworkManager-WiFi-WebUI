@@ -4,9 +4,10 @@ NetworkManager-WiFi-WebUI
 Simple web interface (python2/twisted) for NetworkManager daemon to manage
 WiFi connections.
 
-Designed to work with JS enabled or not, dynamically updating through
-websockets, http long-poll or whatever other mechanism SockJS supports,
-if possible.
+Designed to work with JS enabled or not, dynamically updating through websockets
+(though currently xhr-streaming transport is forced, see notes below), http
+streaming, long-poll, jsonp or whatever other mechanism SockJS supports, if
+possible.
 
 Requirements for this UI are to be fairly lite/minimal, responsive, be able to
 enable WiFi, pick AP, connect/disconnect to and get basic status/scan updates,
@@ -69,8 +70,9 @@ Notes
 
 * Code is a bit rusty and bitrotten, fixes are most welcome.
 
-  In particular, sockjs/websockets over insecure connection don't seem to work in
-  modern FF for me, which might be trivial to fix though.
+  In particular, sockjs + websockets over insecure connection don't seem to work
+  in modern FF for me (while forcing other transport like xhr-streaming works
+  fine), which might be trivial to fix though.
 
   Also, not using the thing (or NM) myself on a regular basis, so likely not a
   very well-maintained project.

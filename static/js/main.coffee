@@ -50,7 +50,7 @@ $(document).ready ->
 		data.id
 
 	sock_connect = ->
-		sock = new SockJS(sock_url)
+		sock = new SockJS(sock_url, null, transports: 'xhr-streaming')
 		sock.onopen = sock_onopen
 		sock.onclose = sock_onclose
 		sock.onmessage = sock_onmessage
