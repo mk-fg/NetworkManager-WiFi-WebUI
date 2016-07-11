@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 
-from components import utils
+from nm_wifi_webui import utils
 
 from txsockjs.factory import SockJSResource
 import jinja2

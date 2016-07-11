@@ -81,9 +81,9 @@ def main(argv=None):
 		sys.exit(0)
 	watchdog_reply_setup(pid)
 
-	from components.webui import WebUI
-	from components.nm import NMInterface
-	from components import utils
+	from nm_wifi_webui.webui import WebUI
+	from nm_wifi_webui.nm import NMInterface
+	from nm_wifi_webui import utils
 
 	from twisted.internet import reactor, defer
 	from twisted.web import resource, server

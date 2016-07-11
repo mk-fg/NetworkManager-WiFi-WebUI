@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 
-from components import utils, secrets
+from nm_wifi_webui import utils, secrets
 
 from txdbus import (
 	error as txdbus_error, client as txdbus_client,
