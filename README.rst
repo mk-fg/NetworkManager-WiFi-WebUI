@@ -1,8 +1,9 @@
 NetworkManager-WiFi-WebUI
 =========================
 
-Simple web interface (python2/twisted) for NetworkManager daemon to manage
-WiFi connections.
+Simple web (http/browser) interface for `NetworkManager
+<https://wiki.gnome.org/Projects/NetworkManager>`_ daemon to manage WiFi
+connections.
 
 Designed to work with JS enabled or not, dynamically updating through websockets
 (though currently xhr-streaming transport is forced, see notes below), http
@@ -41,7 +42,7 @@ Process example::
   # mkdir -m0700 ~nm-wifi-webui
   # chown -R nm-wifi-webui: ~nm-wifi-webui
 
-  # cat <<EOF >/etc/polkit-1/rules.d/50-nm-wifi-webui.rules
+  # cat >/etc/polkit-1/rules.d/50-nm-wifi-webui.rules <<EOF
   polkit.addRule(function(action, subject) { if ( subject.user == "nm-wifi-webui"
     && action.id.indexOf("org.freedesktop.NetworkManager.") == 0 ) return polkit.Result.YES })
   EOF
