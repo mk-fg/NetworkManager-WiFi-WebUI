@@ -13,13 +13,17 @@ Requirements for this UI are to be fairly lite/minimal, responsive, be able to
 enable WiFi, pick AP, connect/disconnect and get basic status/scan updates,
 so nothing fancy, can almost be considered to be a proof of concept.
 
-.. figure:: https://raw.githubusercontent.com/mk-fg/NetworkManager-WiFi-WebUI/master/doc/nm-wifi-webui.jpg
-   :alt: nm-wifi-webui interface looks
-
 |
 
 .. contents::
   :backlinks: none
+
+
+Screenshot
+----------
+
+.. figure:: https://raw.githubusercontent.com/mk-fg/NetworkManager-WiFi-WebUI/master/doc/nm-wifi-webui.jpg
+   :alt: nm-wifi-webui interface looks
 
 
 Installation
