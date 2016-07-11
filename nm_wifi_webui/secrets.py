@@ -39,6 +39,7 @@ class SecretStorage(object):
 		finally:
 			try: tmp_path.remove()
 			except (OSError, IOError): pass
+		self.cache_src = cache_dst
 
 	def get(self, uuid, key=None):
 		val = self.cache.get(uuid)
