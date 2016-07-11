@@ -74,6 +74,8 @@ Notes
   in modern FF for me (while forcing other transport like xhr-streaming works
   fine), which might be trivial to fix though.
 
+  See also: https://github.com/sockjs/sockjs-client/issues/94
+
   Also, not using the thing (or NM) myself on a regular basis, so likely not a
   very well-maintained project.
 
