@@ -110,3 +110,7 @@ Notes
 
 * When debugging DBus or websocket stuff, running script with --noise option can
   be useful, as it'd dump all traffic on these, as script is sending/receiving it.
+
+* Note that gtk3 NM frontend(s) (e.g. default GNOME applet) can be used as a
+  webui too with GDK_BACKEND=broadway, see:
+  https://developer.gnome.org/gtk3/stable/gtk-broadway.html
