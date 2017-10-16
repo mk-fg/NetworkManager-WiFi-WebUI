@@ -57,9 +57,13 @@ Process example::
 
 See ``./nm-wifi-webui.py --help`` output for more configuration options.
 
+Make sure that you also have NetworkManager itself installed and running.
+
+
 Requirements
 ````````````
 
+* `NetworkManager <https://wiki.gnome.org/Projects/NetworkManager>`_ installed and running.
 * Python 2.7
 * `Twisted <https://twistedmatrix.com/>`_
 * `SockJS-Twisted / txsockjs <https://github.com/DesertBus/sockjs-twisted/>`_
