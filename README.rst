@@ -36,24 +36,36 @@ Doesn't make any external api requests, no images or other static.
 Installation
 ------------
 
-Process example::
+Process example (starting as root)::
 
   # useradd nm-wifi-webui
   # mkdir -m0700 ~nm-wifi-webui
   # chown -R nm-wifi-webui: ~nm-wifi-webui
 
+  # mkdir -p /etc/polkit-1/rules.d/
   # cat >/etc/polkit-1/rules.d/50-nm-wifi-webui.rules <<EOF
   polkit.addRule(function(action, subject) { if ( subject.user == "nm-wifi-webui"
     && action.id.indexOf("org.freedesktop.NetworkManager.") == 0 ) return polkit.Result.YES })
+  EOF
+
+  # mkdir -p /etc/polkit-1/localauthority/50-local.d/
+  # cat >/etc/polkit-1/localauthority/50-local.d/nm-wifi-webui.pkla <<EOF
+  [nm-wifi-webui]
+  Identity=unix-user:nm-wifi-webui
+  Action=org.freedesktop.NetworkManager.*
+  ResultAny=yes
   EOF
 
   # su - nm-wifi-webui
 
   % pip2 install --user twisted txsockjs jinja2 txdbus bencode
 
-  % git clone NetworkManager-WiFi-WebUI
+  % git clone --depth=1 https://github.com/mk-fg/NetworkManager-WiFi-WebUI
   % cd NetworkManager-WiFi-WebUI
   % ./nm-wifi-webui.py --debug
+
+Note: "polkit-1/localauthority" is only for old polkit <= 0.105 (run ``pkaction
+--version``), like ones that debians might still use.
 
 See ``./nm-wifi-webui.py --help`` output for more configuration options.
 
