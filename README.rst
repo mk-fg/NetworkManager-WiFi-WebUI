@@ -1,6 +1,11 @@
 NetworkManager-WiFi-WebUI
 =========================
 
+**Deprecation Notice:**
+
+  | This project should only be useful for reference, and maybe to port it
+  | to something more modern. I'd be surprised if it even still works as-is.
+
 Simple web (http/browser) interface for `NetworkManager
 <https://wiki.gnome.org/Projects/NetworkManager>`_ daemon to manage WiFi
 connections.
@@ -14,8 +19,6 @@ Requirements for this UI are to be fairly lite/minimal, responsive, be able to
 enable WiFi, pick AP, connect/disconnect and get basic status/scan updates,
 so nothing fancy, can almost be considered to be a proof of concept.
 
-|
-
 .. contents::
   :backlinks: none
 
@@ -25,8 +28,6 @@ Screenshot
 
 .. figure:: https://raw.githubusercontent.com/mk-fg/NetworkManager-WiFi-WebUI/master/doc/nm-wifi-webui.jpg
    :alt: nm-wifi-webui interface looks
-
-|
 
 Uses bundled (old v3.1.1) bootstrap icons/css/js, bootstrap-switch,
 jquery/modernizr (both can probably be dropped by now), sockjs.
@@ -87,6 +88,8 @@ Requirements
 Notes
 -----
 
+* Code is old python2, rusty and bitrotten.
+
 * Obviously, being a WebUI, this thing is only accessible through some kind of
   network interface (loopback counts), and at the same time is responsible for
   setting one up, so keep that in mind wrt potential uses.
@@ -94,17 +97,6 @@ Notes
   Common use-case is to show up in kiosk-mode browser on something like
   Raspberry Pi (until there's net connection), or be accessible over (not
   managed by NM) ethernet link.
-
-* Code is a bit rusty and bitrotten, fixes are most welcome.
-
-  In particular, sockjs + websockets over insecure connection don't seem to work
-  in modern FF for me (while forcing other transport like xhr-streaming works
-  fine), which might be trivial to fix though.
-
-  See also: https://github.com/sockjs/sockjs-client/issues/94
-
-  Also, not using the thing (or NM) myself on a regular basis, so likely not a
-  very well-maintained project.
 
 * Doesn't need any extra webserver, as it runs on twisted.
 
